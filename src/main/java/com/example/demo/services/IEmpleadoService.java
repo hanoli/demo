@@ -8,5 +8,5 @@ public interface IEmpleadoService {
 	
 	public List<Empleado> getLista();
 
-	public void empleadoId(Long Id);
+	public Empleado empleadoId(Long Id);
 }
