@@ -1,10 +1,14 @@
 package com.example.demo.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,20 +30,25 @@ public class EmpleadosRestController {
 	@Autowired
 	private IEmpleadoServiceImpl empleadosImpl;
 	
-	@ApiOperation(value = "Is Alive operation", notes = "Encuentra un empleado por su ID")
-	@ApiResponses({@ApiResponse(code = HttpServletResponse.SC_OK, message = "OK"),
-	@ApiResponse(code = HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message = "INTERNAL ERROR SERVER"),
-	@ApiResponse(code = HttpServletResponse.SC_UNAUTHORIZED, message = "UNAUTHORIZED"),
-	@ApiResponse(code = HttpServletResponse.SC_FORBIDDEN, message = "FORBIDDEN"),
-	@ApiResponse(code = HttpServletResponse.SC_NOT_FOUND, message = "ELEMENTO NOT FOUND")})
+	@ApiOperation(value = "getEmpleados", notes = "Obtiene todos los empleados de la Base de Datos")
 	@GetMapping("/lista")
 	public List<Empleado> getEmpleados(){
 		return empleadosImpl.getLista();
 	}
 	
+	@ApiOperation(value = "getEmpleadoById", notes = "Obtiene un solo empleado de la Base de Datos por su Id")
 	@GetMapping("/idEmpleado/{id}")
-	public Empleado getEmpleadoById(@PathVariable Long id){
-		return empleadosImpl.empleadoId(id);
+	public ResponseEntity<?> getEmpleadoById(@PathVariable Long id){
+		Empleado empleado = empleadosImpl.empleadoId(id);
+		
+		Map<String,Object> response = new HashMap<>();
+		
+		if(empleado == null) {
+			response.put("mensaje", "El Id del empleado no existe");
+			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity(empleado, HttpStatus.OK); 
 	}
 	
 	
