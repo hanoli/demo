@@ -28,6 +28,19 @@ public class IEmpleadoServiceImpl implements IEmpleadoService{
 	public Empleado empleadoId(Long id) {
 		 return empleadosDao.findById(id).orElse(null);
 	}
+
+
+	@Override
+	public Empleado guardaEmpleado(Empleado empleado) {
+		return empleadosDao.save(empleado);
+	}
+
+
+	@Override
+	public void Eliminar(Long id) {
+		 empleadosDao.deleteById(id);
+		
+	}
 	
 
 }
