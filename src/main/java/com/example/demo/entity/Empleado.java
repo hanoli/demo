@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,8 +15,12 @@ public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 4629780573695595838L;
 	
+	//@Id
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//Configuracion para Oracle
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CUST_SEQ")
+	@SequenceGenerator(sequenceName = "empleado_seq", allocationSize = 1, name = "CUST_SEQ")
 	private Long id;
 	private String nombre;
 	private String apellido;

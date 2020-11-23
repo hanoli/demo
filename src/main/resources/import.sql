@@ -1,4 +1,4 @@
-insert into empleados (nombre,apellido) values ('han','thom');
-insert into empleados (nombre,apellido) values ('thom','han');
-insert into empleados (nombre,apellido) values ('hanoli','thom');
-insert into empleados (nombre,apellido) values ('myhanoli','thom');
+insert into empleados (id,nombre,apellido) values (1,'han','thom');
+insert into empleados (id,nombre,apellido) values (2,'thom','han');
+insert into empleados (id,nombre,apellido) values (3,'hanoli','thom');
+insert into empleados (id,nombre,apellido) values (4,'myhanoli','thom');
