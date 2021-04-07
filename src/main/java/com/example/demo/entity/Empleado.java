@@ -15,8 +15,6 @@ public class Empleado implements Serializable{
 	
 	private static final long serialVersionUID = 4629780573695595838L;
 	
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	//Configuracion para Oracle
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CUST_SEQ")
