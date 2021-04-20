@@ -18,7 +18,7 @@ public class Empleado implements Serializable{
 	@Id
 	//Configuracion para Oracle
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CUST_SEQ")
-	@SequenceGenerator(sequenceName = "empleado_seq", allocationSize = 1, name = "CUST_SEQ")
+	@SequenceGenerator(name = "CUST_SEQ",sequenceName = "empleado_seq",initialValue=1, allocationSize = 1 )
 	private Long id;
 	private String nombre;
 	private String apellido;

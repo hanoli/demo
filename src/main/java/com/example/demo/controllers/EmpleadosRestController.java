@@ -97,8 +97,8 @@ public class EmpleadosRestController {
 		
 	}
 	
-	@ApiOperation(value = "actualiza", notes = "Elimina un empleado en la BD")
-	@DeleteMapping("/Eliminar/{id}")
+	@ApiOperation(value = "Eliminar", notes = "Elimina un empleado en la BD")
+	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable Long id) {
 		
 		empleadosImpl.Eliminar(id);
