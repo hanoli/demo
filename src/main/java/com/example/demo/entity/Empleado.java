@@ -21,7 +21,10 @@ public class Empleado implements Serializable{
 	@SequenceGenerator(name = "CUST_SEQ",sequenceName = "empleado_seq",initialValue=1, allocationSize = 1 )
 	private Long id;
 	private String nombre;
-	private String apellido;
+	private String apellidoPat;
+	private String apellidoMat;
+	private String telefono;
+	private String correo;
 	
 	public Long getId() {
 		return id;
@@ -35,12 +38,31 @@ public class Empleado implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getApellido() {
-		return apellido;
+	public String getApellidoPat() {
+		return apellidoPat;
 	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidoPat(String apellidoPat) {
+		this.apellidoPat = apellidoPat;
 	}
+	public String getApellidoMat() {
+		return apellidoMat;
+	}
+	public void setApellidoMat(String apellidoMat) {
+		this.apellidoMat = apellidoMat;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+	
 	
 	
 
