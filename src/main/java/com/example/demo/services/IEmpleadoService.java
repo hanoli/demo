@@ -1,15 +1,15 @@
 package com.example.demo.services;
 
 import java.util.List;
-import com.example.demo.entity.Empleado;
+import com.example.demo.entity.Cliente;
 
 public interface IEmpleadoService {
 	
-	public List<Empleado> getLista();
+	public List<Cliente> getLista();
 
-	public Empleado empleadoId(Long Id);
+	public Cliente empleadoId(Long Id);
 	
-	public Empleado guardaEmpleado(Empleado empleado);
+	public Cliente guardaEmpleado(Cliente empleado);
 	
 	public void Eliminar(Long id);
 }

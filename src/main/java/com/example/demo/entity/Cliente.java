@@ -1,30 +1,47 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-@Table(name="empleados")
-public class Empleado implements Serializable{
+@Table(name="clientes")
+public class Cliente implements Serializable{
 	
 	private static final long serialVersionUID = 4629780573695595838L;
 	
 	@Id
 	//Configuracion para Oracle
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CUST_SEQ")
-	@SequenceGenerator(name = "CUST_SEQ",sequenceName = "empleado_seq",initialValue=1, allocationSize = 1 )
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CLI_SEQ")
+	@SequenceGenerator(name = "CLI_SEQ",sequenceName = "cliente_seq",initialValue=1, allocationSize = 1 )
 	private Long id;
 	private String nombre;
 	private String apellidoPat;
 	private String apellidoMat;
 	private String telefono;
 	private String correo;
+	
+	@JsonIgnoreProperties(value={"cliente", "hibernateLazyInitializer", "handler"}, allowSetters=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+	private List<Folio> folios;
+	
+	
+	public Cliente() {
+		this.folios = new ArrayList<>();
+	}
+	
 	
 	public Long getId() {
 		return id;
@@ -61,6 +78,14 @@ public class Empleado implements Serializable{
 	}
 	public void setCorreo(String correo) {
 		this.correo = correo;
+	}
+	
+	
+	public List<Folio> getFolios() {
+		return folios;
+	}
+	public void setFolios(List<Folio> folios) {
+		this.folios = folios;
 	}
 	
 	

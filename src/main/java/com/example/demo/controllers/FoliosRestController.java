@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Cliente;
+import com.example.demo.entity.Folio;
 import com.example.demo.servicesImpl.EmpleadoServiceImpl;
+import com.example.demo.servicesImpl.FolioServiceImpl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,56 +28,56 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RestController
 @RequestMapping("/api")
 @Api
-public class EmpleadosRestController {
-
-	@Autowired
-	private EmpleadoServiceImpl empleadosImpl;
+public class FoliosRestController {
 	
-	@ApiOperation(value = "getEmpleados", notes = "Obtiene todos los empleados de la Base de Datos")
-	@GetMapping("/lista")
-	public List<Cliente> getEmpleados(){
-		return empleadosImpl.getLista();
+	@Autowired
+	private FolioServiceImpl foliosImpl;
+	
+	@ApiOperation(value = "getFolios", notes = "Obtiene todos los folios generados")
+	@GetMapping("/listaFolios")
+	public List<Folio> getFolios(){
+		return foliosImpl.getLista();
 	}
 	
-	@ApiOperation(value = "getEmpleadoById", notes = "Obtiene un solo empleado de la Base de Datos por su Id")
-	@GetMapping("/idEmpleado/{id}")
-	public ResponseEntity<?> getEmpleadoById(@PathVariable Long id){
-		Cliente empleado = empleadosImpl.empleadoId(id);
+	@ApiOperation(value = "getFolioById", notes = "Obtiene un solo empleado de la Base de Datos por su Id")
+	@GetMapping("/idFolio/{id}")
+	public ResponseEntity<?> getFolioById(@PathVariable Long id){
+		Folio folio = foliosImpl.folioId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
-		if(empleado == null) {
+		if(folio == null) {
 			response.put("mensaje", "El Id del empleado no existe");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity(empleado, HttpStatus.OK); 
+		return new ResponseEntity(folio, HttpStatus.OK); 
 	}
 	
-	@ApiOperation(value = "guardaEmpleado", notes = "Guarda un empleado en la BD")
-	@PostMapping("/guardar")
-	public ResponseEntity<?> guardaEmpleado(@RequestBody Cliente empleado ) {
+	@ApiOperation(value = "guardaFolio", notes = "Guarda un folio en la BD")
+	@PostMapping("/guardarFolio")
+	public ResponseEntity<?> guardaFolio(@RequestBody Folio folio ) {
 			
 		
 		Map<String,Object> response = new HashMap<>();
 		
 		try {
-			empleadosImpl.guardaEmpleado(empleado);	
+			foliosImpl.guardaFolio(folio);	
 		}catch (Exception e) {
-			response.put("mensaje", "Hubo un problema al guardar el empleado");
+			response.put("mensaje", "Hubo un problema al guardar el folio");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El empleado se guardo con exito");
+		response.put("mensaje", "El folio se guardo con exito");
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.CREATED);
 		
 	}
 	
-	@ApiOperation(value = "actualiza", notes = "Actualiza un empleado en la BD")
+	/*@ApiOperation(value = "actualiza", notes = "Actualiza un empleado en la BD")
 	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<?> actualiza(@RequestBody Cliente empleado, @PathVariable Long id){
+	public ResponseEntity<?> actualiza(@RequestBody Empleado empleado, @PathVariable Long id){
 		
-		Cliente empl = empleadosImpl.empleadoId(id);
+		Folio empl = foliosImpl.folioId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -90,7 +92,7 @@ public class EmpleadosRestController {
 				empl.setNombre(empleado.getNombre());
 				empl.setApellidoPat(empleado.getApellidoPat());
 				
-				empleadosImpl.guardaEmpleado(empl);
+				foliosImpl.guardaEmpleado(empl);
 				
 			}catch (Exception e) {
 				response.put("mensaje", "Hubo un problema al actualizar el empleado");
@@ -100,13 +102,13 @@ public class EmpleadosRestController {
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 		}
 		
-	}
+	}*/
 	
 	@ApiOperation(value = "Eliminar", notes = "Elimina un empleado en la BD")
-	@DeleteMapping("/eliminar/{id}")
+	@DeleteMapping("/eliminarFolio/{id}")
 	public void eliminar(@PathVariable Long id) {
 		
-		empleadosImpl.Eliminar(id);
+		foliosImpl.Eliminar(id);
 		
 	}
 	

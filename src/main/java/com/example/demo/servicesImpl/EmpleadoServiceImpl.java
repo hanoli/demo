@@ -1,33 +1,34 @@
-package com.example.demo.services;
+package com.example.demo.servicesImpl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.demo.dao.IEmpleadoDAO;
-import com.example.demo.entity.Empleado;
+import com.example.demo.entity.Cliente;
+import com.example.demo.services.IEmpleadoService;
 
 @Service
-public class IEmpleadoServiceImpl implements IEmpleadoService{
+public class EmpleadoServiceImpl implements IEmpleadoService{
 	
 	@Autowired
 	private IEmpleadoDAO empleadosDao;
 
 	@Override
-	public List<Empleado> getLista() {
+	public List<Cliente> getLista() {
 		
-		return (List<Empleado>) empleadosDao.findAll();
+		return (List<Cliente>) empleadosDao.findAll();
 	
 	}
 
 	
 	@Override
-	public Empleado empleadoId(Long id) {
+	public Cliente empleadoId(Long id) {
 		 return empleadosDao.findById(id).orElse(null);
 	}
 
 
 	@Override
-	public Empleado guardaEmpleado(Empleado empleado) {
+	public Cliente guardaEmpleado(Cliente empleado) {
 		return empleadosDao.save(empleado);
 	}
 
