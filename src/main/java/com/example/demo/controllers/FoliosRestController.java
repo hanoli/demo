@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Folio;
-import com.example.demo.servicesImpl.EmpleadoServiceImpl;
+import com.example.demo.servicesImpl.ClienteServiceImpl;
 import com.example.demo.servicesImpl.FolioServiceImpl;
 
 import io.swagger.annotations.Api;

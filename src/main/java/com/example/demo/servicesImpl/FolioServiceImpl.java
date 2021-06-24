@@ -3,11 +3,11 @@ package com.example.demo.servicesImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.dao.IEmpleadoDAO;
+import com.example.demo.dao.IClienteDAO;
 import com.example.demo.dao.IFolioDAO;
 import com.example.demo.entity.Cliente;
 import com.example.demo.entity.Folio;
-import com.example.demo.services.IEmpleadoService;
+import com.example.demo.services.IClienteService;
 import com.example.demo.services.IFolioService;
 
 @Service

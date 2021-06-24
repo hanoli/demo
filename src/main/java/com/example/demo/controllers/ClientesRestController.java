@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.Cliente;
-import com.example.demo.servicesImpl.EmpleadoServiceImpl;
+import com.example.demo.servicesImpl.ClienteServiceImpl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,21 +26,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RestController
 @RequestMapping("/api")
 @Api
-public class EmpleadosRestController {
+public class ClientesRestController {
 
 	@Autowired
-	private EmpleadoServiceImpl empleadosImpl;
+	private ClienteServiceImpl clintesImpl;
 	
-	@ApiOperation(value = "getEmpleados", notes = "Obtiene todos los empleados de la Base de Datos")
+	@ApiOperation(value = "getClientes", notes = "Obtiene todos los clientes de la Base de Datos")
 	@GetMapping("/lista")
-	public List<Cliente> getEmpleados(){
-		return empleadosImpl.getLista();
+	public List<Cliente> getClientes(){
+		return clintesImpl.getLista();
 	}
 	
-	@ApiOperation(value = "getEmpleadoById", notes = "Obtiene un solo empleado de la Base de Datos por su Id")
-	@GetMapping("/idEmpleado/{id}")
-	public ResponseEntity<?> getEmpleadoById(@PathVariable Long id){
-		Cliente empleado = empleadosImpl.empleadoId(id);
+	@ApiOperation(value = "getEmpleadoById", notes = "Obtiene un solo cliente de la Base de Datos por su Id")
+	@GetMapping("/idCliente/{id}")
+	public ResponseEntity<?> getClienteById(@PathVariable Long id){
+		Cliente empleado = clintesImpl.clienteId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -52,30 +52,30 @@ public class EmpleadosRestController {
 		return new ResponseEntity(empleado, HttpStatus.OK); 
 	}
 	
-	@ApiOperation(value = "guardaEmpleado", notes = "Guarda un empleado en la BD")
+	@ApiOperation(value = "guardaCliente", notes = "Guarda un cliente en la BD")
 	@PostMapping("/guardar")
-	public ResponseEntity<?> guardaEmpleado(@RequestBody Cliente empleado ) {
+	public ResponseEntity<?> guardaCliente(@RequestBody Cliente empleado ) {
 			
 		
 		Map<String,Object> response = new HashMap<>();
 		
 		try {
-			empleadosImpl.guardaEmpleado(empleado);	
+			clintesImpl.guardaCliente(empleado);	
 		}catch (Exception e) {
-			response.put("mensaje", "Hubo un problema al guardar el empleado");
+			response.put("mensaje", "Hubo un problema al guardar el cliente");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El empleado se guardo con exito");
+		response.put("mensaje", "El cliente se guardo con exito");
 		return new ResponseEntity<Map<String,Object>>(response, HttpStatus.CREATED);
 		
 	}
 	
-	@ApiOperation(value = "actualiza", notes = "Actualiza un empleado en la BD")
+	@ApiOperation(value = "actualiza", notes = "Actualiza un cliente en la BD")
 	@PutMapping("/actualizar/{id}")
-	public ResponseEntity<?> actualiza(@RequestBody Cliente empleado, @PathVariable Long id){
+	public ResponseEntity<?> actualiza(@RequestBody Cliente cliente, @PathVariable Long id){
 		
-		Cliente empl = empleadosImpl.empleadoId(id);
+		Cliente empl = clintesImpl.clienteId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
@@ -87,26 +87,29 @@ public class EmpleadosRestController {
 		}else {
 			try {
 				
-				empl.setNombre(empleado.getNombre());
-				empl.setApellidoPat(empleado.getApellidoPat());
+				empl.setNombre(cliente.getNombre());
+				empl.setApellidoPat(cliente.getApellidoPat());
+				empl.setApellidoMat(cliente.getApellidoMat());
+				empl.setTelefono(cliente.getTelefono());
+				empl.setCorreo(cliente.getCorreo());
 				
-				empleadosImpl.guardaEmpleado(empl);
+				clintesImpl.guardaCliente(empl);
 				
 			}catch (Exception e) {
-				response.put("mensaje", "Hubo un problema al actualizar el empleado");
+				response.put("mensaje", "Hubo un problema al actualizar el cliente");
 				return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-			response.put("mensaje", "El empleado se actualizo con exito");
+			response.put("mensaje", "El cliente se actualizo con exito");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.OK);
 		}
 		
 	}
 	
-	@ApiOperation(value = "Eliminar", notes = "Elimina un empleado en la BD")
+	@ApiOperation(value = "Eliminar", notes = "Elimina un cliente en la BD")
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable Long id) {
 		
-		empleadosImpl.Eliminar(id);
+		clintesImpl.Eliminar(id);
 		
 	}
 	
