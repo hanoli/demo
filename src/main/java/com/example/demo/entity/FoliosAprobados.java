@@ -4,29 +4,24 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 @Entity
-@Table(name="folios")
-public class Folio implements Serializable{
+@Table(name="foliosaprobados")
+public class FoliosAprobados implements Serializable{
 	
 	private static final long serialVersionUID = 4629780573695595838L;
 	
 	@Id
 	//Configuracion para Oracle
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FOL_SEQ")
-	@SequenceGenerator(name = "FOL_SEQ",sequenceName = "folio_seq",initialValue=1, allocationSize = 1 )
+	@SequenceGenerator(name = "FOL_SEQ",sequenceName = "foliosAprobados_seq",initialValue=1, allocationSize = 1 )
 	private Long id;
 	private String folio;
 	
@@ -36,11 +31,8 @@ public class Folio implements Serializable{
 	private String marca;
 	private String modelo;
 	private String numSerie;
-	private String comentarios;
-	
-	@JsonIgnoreProperties(value={"folios", "hibernateLazyInitializer", "handler"}, allowSetters=true)
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Cliente cliente;
+	private Integer cliente;
+	private Integer estatus;
 	
 	public Long getId() {
 		return id;
@@ -86,32 +78,32 @@ public class Folio implements Serializable{
 	public void setNumSerie(String numSerie) {
 		this.numSerie = numSerie;
 	}
-	public Cliente getCliente() {
+	/**
+	 * @return the cliente
+	 */
+	public Integer getCliente() {
 		return cliente;
 	}
-	public void setCliente(Cliente cliente) {
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(Integer cliente) {
 		this.cliente = cliente;
 	}
 	/**
-	 * @return the comentarios
+	 * @return the estatus
 	 */
-	public String getComentarios() {
-		return comentarios;
+	public Integer getEstatus() {
+		return estatus;
 	}
 	/**
-	 * @param comentarios the comentarios to set
+	 * @param estatus the estatus to set
 	 */
-	public void setComentarios(String comentarios) {
-		this.comentarios = comentarios;
+	public void setEstatus(Integer estatus) {
+		this.estatus = estatus;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	
 
 }
+

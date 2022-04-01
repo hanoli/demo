@@ -30,6 +30,7 @@ public class Cliente implements Serializable{
 	private String nombre;
 	private String apellidoPat;
 	private String apellidoMat;
+	private String direccion;
 	private String telefono;
 	private String correo;
 	
@@ -67,6 +68,16 @@ public class Cliente implements Serializable{
 	public void setApellidoMat(String apellidoMat) {
 		this.apellidoMat = apellidoMat;
 	}
+	
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+
 	public String getTelefono() {
 		return telefono;
 	}

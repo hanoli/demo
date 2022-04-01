@@ -29,27 +29,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ClientesRestController {
 
 	@Autowired
-	private ClienteServiceImpl clintesImpl;
+	private ClienteServiceImpl clientesImpl;
 	
 	@ApiOperation(value = "getClientes", notes = "Obtiene todos los clientes de la Base de Datos")
 	@GetMapping("/lista")
 	public List<Cliente> getClientes(){
-		return clintesImpl.getLista();
+		return clientesImpl.getLista();
 	}
 	
-	@ApiOperation(value = "getEmpleadoById", notes = "Obtiene un solo cliente de la Base de Datos por su Id")
+	@ApiOperation(value = "getClienteById", notes = "Obtiene un solo cliente de la Base de Datos por su Id")
 	@GetMapping("/idCliente/{id}")
 	public ResponseEntity<?> getClienteById(@PathVariable Long id){
-		Cliente empleado = clintesImpl.clienteId(id);
+		Cliente cliente = clientesImpl.clienteId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
-		if(empleado == null) {
+		if(cliente == null) {
 			response.put("mensaje", "El Id del empleado no existe");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity(empleado, HttpStatus.OK); 
+		return new ResponseEntity(cliente, HttpStatus.OK); 
 	}
 	
 	@ApiOperation(value = "guardaCliente", notes = "Guarda un cliente en la BD")
@@ -60,7 +60,7 @@ public class ClientesRestController {
 		Map<String,Object> response = new HashMap<>();
 		
 		try {
-			clintesImpl.guardaCliente(empleado);	
+			clientesImpl.guardaCliente(empleado);	
 		}catch (Exception e) {
 			response.put("mensaje", "Hubo un problema al guardar el cliente");
 			return new ResponseEntity<Map<String,Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -75,11 +75,11 @@ public class ClientesRestController {
 	@PutMapping("/actualizar/{id}")
 	public ResponseEntity<?> actualiza(@RequestBody Cliente cliente, @PathVariable Long id){
 		
-		Cliente empl = clintesImpl.clienteId(id);
+		Cliente clte = clientesImpl.clienteId(id);
 		
 		Map<String,Object> response = new HashMap<>();
 		
-		if(empl == null) {
+		if(clte == null) {
 			
 			
 			response.put("mensaje", "El Id del empleado no existe");
@@ -87,13 +87,14 @@ public class ClientesRestController {
 		}else {
 			try {
 				
-				empl.setNombre(cliente.getNombre());
-				empl.setApellidoPat(cliente.getApellidoPat());
-				empl.setApellidoMat(cliente.getApellidoMat());
-				empl.setTelefono(cliente.getTelefono());
-				empl.setCorreo(cliente.getCorreo());
+				clte.setNombre(cliente.getNombre());
+				clte.setApellidoPat(cliente.getApellidoPat());
+				clte.setApellidoMat(cliente.getApellidoMat());
+				clte.setDireccion(cliente.getDireccion());
+				clte.setTelefono(cliente.getTelefono());
+				clte.setCorreo(cliente.getCorreo());
 				
-				clintesImpl.guardaCliente(empl);
+				clientesImpl.guardaCliente(clte);
 				
 			}catch (Exception e) {
 				response.put("mensaje", "Hubo un problema al actualizar el cliente");
@@ -109,7 +110,7 @@ public class ClientesRestController {
 	@DeleteMapping("/eliminar/{id}")
 	public void eliminar(@PathVariable Long id) {
 		
-		clintesImpl.Eliminar(id);
+		clientesImpl.Eliminar(id);
 		
 	}
 	

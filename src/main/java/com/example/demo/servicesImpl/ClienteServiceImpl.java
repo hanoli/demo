@@ -3,15 +3,16 @@ package com.example.demo.servicesImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.demo.dao.IClienteDAO;
+
 import com.example.demo.entity.Cliente;
+import com.example.demo.repository.ClienteRepository;
 import com.example.demo.services.IClienteService;
 
 @Service
 public class ClienteServiceImpl implements IClienteService{
 	
 	@Autowired
-	private IClienteDAO clientesDao;
+	private ClienteRepository clientesDao;
 
 	@Override
 	public List<Cliente> getLista() {

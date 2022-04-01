@@ -1,59 +1,98 @@
 package com.example.demo.dto;
 
+import java.time.LocalDate;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class FolioDTO {
 	
 	private String folio;
-	private Date fecha;
-	private String nombre;
-	private Integer idTipoEquipo;
+	private String tipoEquipo;
 	private String marca;
 	private String modelo;
-	private String numSerie;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date fechaInicio;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date fechaFin;
+	/**
+	 * @return the folio
+	 */
 	public String getFolio() {
 		return folio;
 	}
+	/**
+	 * @param folio the folio to set
+	 */
 	public void setFolio(String folio) {
 		this.folio = folio;
 	}
-	public Date getFecha() {
-		return fecha;
+	
+	
+	
+	/**
+	 * @return the fechaInicio
+	 */
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	/**
+	 * @param fechaInicio the fechaInicio to set
+	 */
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
-	public String getNombre() {
-		return nombre;
+	/**
+	 * @return the fechaFin
+	 */
+	public Date getFechaFin() {
+		return fechaFin;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	/**
+	 * @param fechaFin the fechaFin to set
+	 */
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
-	public Integer getIdTipoEquipo() {
-		return idTipoEquipo;
+	/**
+	 * @return the tipoEquipo
+	 */
+	public String getTipoEquipo() {
+		return tipoEquipo;
 	}
-	public void setIdTipoEquipo(Integer idTipoEquipo) {
-		this.idTipoEquipo = idTipoEquipo;
+	/**
+	 * @param tipoEquipo the tipoEquipo to set
+	 */
+	public void setTipoEquipo(String tipoEquipo) {
+		this.tipoEquipo = tipoEquipo;
 	}
+	/**
+	 * @return the marca
+	 */
 	public String getMarca() {
 		return marca;
 	}
+	/**
+	 * @param marca the marca to set
+	 */
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
+	/**
+	 * @return the modelo
+	 */
 	public String getModelo() {
 		return modelo;
 	}
+	/**
+	 * @param modelo the modelo to set
+	 */
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
 	}
-	public String getNumSerie() {
-		return numSerie;
-	}
-	public void setNumSerie(String numSerie) {
-		this.numSerie = numSerie;
-	}
+	
+	
 	
 	
 	
